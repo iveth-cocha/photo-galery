@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Camera,CameraResultType, CameraSource,Photo} from '@capacitor/camera'
+import { WebView } from '@capacitor/core';
 import {Filesystem,Directory} from '@capacitor/filesystem'
 import {Preferences} from '@capacitor/preferences'
 
@@ -7,6 +8,7 @@ import {Preferences} from '@capacitor/preferences'
   providedIn: 'root'
 })
 export class PhotoService {
+  public photos: UserPhoto[]=[];
 
   constructor() { }
 
@@ -19,5 +21,14 @@ export class PhotoService {
       quality: 100
 
     });
-  }
+
+    this.photos.unshift({
+      filepath:"soon...",
+      webviewPath: capturedPhoto.webPath!
+    }); 
+}
+}
+export interface UserPhoto{
+   filepath:string;
+   webviewPath?: string;   
 }
